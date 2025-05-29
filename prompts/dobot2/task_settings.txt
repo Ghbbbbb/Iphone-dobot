@@ -1,0 +1,155 @@
+[任务描述] 移动夹爪到多个位置，不要抓取任何物体。 
+[思路] 使用 move_gripper_orientation()或move_joint_by_increment()函数将夹爪移动到一个位置，然后重复上述过程直到所有位置都已到达。 
+[示例] 
+#示例1 
+用户: 请先向右移动0.8厘米，然后向前移动0.8厘米，再向左移动0.8厘米，最后向后移动0.8厘米。 
+你:"```python
+pri.say("好的，现在让我来控制机械臂完成上述运动")
+#向右移动夹爪8厘米
+pri.move_gripper_orientation('右', 8)
+#向前移动夹爪8厘米
+pri.move_gripper_orientation('前', 8)
+#向左移动夹爪8厘米
+pri.move_gripper_orientation('左', 8)
+#向后移动夹爪8厘米
+pri.move_gripper_orientation('后', 8)```"
+#示例2
+用户: 请向右移动1厘米，然后将J1轴正转30度，再向前移动15毫米，最后将J2轴负转50度。 
+你:"```python
+pri.say("好的，现在让我调用一些函数来完成上述的动作")
+#向右移动夹爪1厘米
+pri.move_gripper_orientation('右', 10)
+#J1轴正转30度
+pri.move_joint_by_increment("1轴",30)
+#向前移动夹爪15毫米
+pri.move_gripper_orientation('前', 15)
+#J2轴负转50度
+pri.move_joint_by_increment("2轴",-50)```"
+---
+
+[任务描述]
+将指定的物体堆叠在指定的物体上。
+[思路]
+使用 stack_object_on_object() 函数将物体堆叠在物体上，然后使用 reset_robot() 将机器人重置到初始位置。
+[示例]
+#示例1
+用户：依次将黄色块和青草颜色的块堆叠到杯子上。” 
+你："```python
+pri.say("好的，让我来将黄色和青草颜色的块堆叠到杯子上,青草颜色是绿色,所以应该先将黄色块堆叠到杯子上,然后再将绿色块堆叠到黄色块上")
+#将黄色块堆在杯子上  
+pri.stack_object_on_object('yellow_block', 'cup')  
+#将绿色块堆叠到黄色块上
+pri.say('用户提到了绿色块,然而环境中只有黄色块和杯子并没有绿色块,让我先向右挪动一下机械臂来查看是否有绿色块')
+pri.move_gripper_orientation('右',60)
+obj_list = pri.take_photo()
+if 'green_block' in obj_list:
+    pri.say('好的,我已经找到了绿色块,现在让我将它放到黄色块上')
+    pri.stack_object_on_object('green_block', 'yellow_block')  
+else:
+    pri.say('目前仍然没有绿色块,让我再向左挪动看一下')
+    pri.move_gripper_orientation('左',120)
+    obj_list = pri.take_photo()
+    if 'green_block' in obj_list:
+        pri.say('好的,我已经找到了绿色块,现在让我将它放到黄色块上')
+        pri.stack_object_on_object('green_block', 'yellow_block')  
+    else:
+        pri.say('对不起,桌面上并没有绿色块')
+
+#重置机器人  
+pri.reset_robot()  
+```"
+#示例2
+用户: 请你看一下环境中是否有电脑用品，如果有的话，把它放到 
+食物用品上方。
+你: ```python
+pri.say('现在让我看一下桌面上有哪些物品。')
+# 检查环境中存在的物品
+obj_list = pri.take_photo()
+# 初始化电脑用品和食物用品变量
+computer_item = None
+food_item = None
+
+# 定义电脑用品和食物用品列表以辨认
+computer_items = ['mouse', 'keyboard']
+food_items = ['banana', 'apple']
+
+# 遍历找到的物品，检查是否为电脑或食物用品
+for obj in obj_list:
+    if obj in computer_items:
+        computer_item = obj
+    elif obj in food_items:
+        food_item = obj
+
+# 如果找到电脑用品和食物用品
+if computer_item and food_item:
+    pri.say(f'我找到了电脑用品{computer_item}和食物用品{food_item}，正在把电脑用品放到食物用品上方。')
+    # 将电脑用品堆叠到食物用品上
+    pri.stack_object_on_object(computer_item, food_item)       
+else:
+    if not computer_item and not food_item:
+        pri.say('很抱歉，我没有在环境中找到电脑用品和食物用品。
+')
+    elif not computer_item:
+        pri.say('很抱歉，我没有在环境中找到电脑用品。')        
+    else:
+        pri.say('很抱歉，我没有在环境中找到食物用品。')        
+
+# 任务完成后重置机器人
+pri.reset_robot()
+---  
+
+[任务描述]  
+拾起物体并将其相对另一物体在指定方向和距离处放置。
+[思路]  
+使用 `pick_and_place_next_to()` 函数拾取一个物体并将其放置在与另一物体的指定相对方向和距离处，然后使用 `reset_robot()` 将机器人重置到初始位置。
+[示例]  
+#示例1  
+用户：将蓝色积木放置在相对于绿色积木后1厘米处。
+你："```python
+pri.say("好的，现在让我来控制机械臂完成这个任务。")
+#蓝色块放到绿色块块后面1厘米处
+pri.pick_and_place_next_to('blue_block', 'green_block', '后', 10)  
+#重置机器人  
+pri.reset_robot()  
+```" 
+#示例2  
+用户：将血液颜色的方块放到杯子左侧20厘米处 
+你："```python
+pri.say("好的，让我来推理一下，这里的血液颜色应该是红色,所以要将红色的方块放到杯子左侧20厘米处")
+#将红色块放到杯子块左侧20厘米处
+pri.say('用户提到了红色块,然而环境中只有黄色块和杯子并没有红色块,让我先向右挪动一下机械臂来查看是否有红色块')
+pri.move_gripper_orientation('右',60)
+obj_list = pri.take_photo()
+if 'red_block' in obj_list:
+    pri.say('好的,我已经找到了红色块,现在让我将它放到指定位置')
+    pri.pick_and_place_next_to('red_block', 'cup', '左', 20)    
+else:
+    pri.say('目前仍然没有红色块,让我再向左挪动看一下')
+    pri.move_gripper_orientation('左',120)
+    obj_list = pri.take_photo()
+    if 'red_block' in obj_list:
+        pri.say('好的,我已经找到了红色块,现在让我将它放到指定位置')
+        pri.pick_and_place_next_to('red_block', 'cup', '左', 20) 
+    else:
+        pri.say('对不起,桌面上并没有红色块')
+#重置机器人  
+pri.reset_robot()  
+```"
+---  
+ 
+
+[任务描述]  
+如果现有的函数无法解决用户的机器人指令或者回答用户问题时，可以使用 `pri.say()` 函数。
+[思路]  
+当没有匹配的机器人动作API或需要回答一些常识性问题时使用 `pri.say()`。
+[示例]  
+#示例1  
+用户：请用机械臂写一个单词。
+你："```python  
+pri.say("抱歉，我无法理解这个指令，因为我的库中没有可用的函数来完成此操作")  
+```"
+#示例2  
+用户：我如果发烧了，我应该怎么做？
+你："```python  
+pri.say('你可以喝一些热水，好好休息，如果病情持续，你可以去看下医生并吃点退烧药')  
+```"

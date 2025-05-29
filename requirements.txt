@@ -1,0 +1,15 @@
+colorama==0.4.6
+langchain==0.2.1
+langchain_community==0.2.1
+langchain_openai==0.1.8
+numpy==1.26.4
+opencv_contrib_python==4.9.0.80
+opencv_python==4.9.0.80
+pinecone==4.0.0
+pyrealsense2==2.55.1.6486
+pyserial==3.5
+pyttsx3==2.90
+scipy==1.15.1
+transformations==2025.1.1
+ultralytics==8.3.96
+watchdog==4.0.1
