@@ -6,21 +6,21 @@
 
 
 ## 🛠前置依赖
-#### 01 物理环境配置
+### 01 物理环境配置
 参考dobot官方示例[Dobot物理环境配置](https://github.com/Dobot-Arm/TCP-IP-Python-V3/tree/main)，这边强烈建议你跑通官方的`main.py`后再进行下面的操作。
 
-#### 02 移动端配置
+### 02 移动端配置
 安装“快捷指令”软件，然后配置快捷指令，使其可以顺序完成语音转文本和文本存储文件夹两大步骤。配置界面如下图所示，之后需要在PC端配置与Iphone手机的共享文件夹，可以[参考视频](https://www.bilibili.com/video/BV1zk4y167Wi/)。当上述两部配置完成后，可以通过语音输入快捷指令，然后存储到对应文件夹，这时在PC端也会出现对应的文件，支持各类文件的传输，为后续LLM提取文本和结果存储提供了基础。
 
 ![移动端配置](https://github.com/Ghbbbbb/Iphone-dobot/blob/main/assets/set.png)
 
-#### 03 虚拟环境配置
+### 03 虚拟环境配置
 
 ```
-    # 克隆项目
-    git clone https://github.com/Ghbbbbb/Iphone-dobot.git
-    # 安装依赖包(推荐 python=3.11.x)
-    pip install -r requirements.txt
+# 克隆项目
+git clone https://github.com/Ghbbbbb/Iphone-dobot.git
+# 安装依赖包(推荐 python=3.11.x)
+pip install -r requirements.txt
 ``` 
 
 ## 🏋️ 运行
@@ -61,9 +61,16 @@ python client.py --prompt "dobot2" --voice #根据用户语音输入测试，将
 
 
 ## 📈 结果
+<div align=center>
 ![Results](https://github.com/Ghbbbbb/Iphone-dobot/blob/main/assets/1.gif)
-
+<div>
+<div align=center>
+![Results](https://github.com/Ghbbbbb/Iphone-dobot/blob/main/assets/2.gif)
+<div>
+<div align=center>
+![Results](https://github.com/Ghbbbbb/Iphone-dobot/blob/main/assets/3.gif)
+<div>
 
 ## 📄 联系
 
-如果有任何问题，请联系我们[NEU-RCL]("http://www.neurcl.cn/")
+如果有任何问题，请[联系我们]("http://www.neurcl.cn")
