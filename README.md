@@ -64,7 +64,9 @@ python client.py --prompt "dobot2" --voice #根据用户语音输入测试，将
 ![Results](https://github.com/Ghbbbbb/Iphone-dobot/blob/main/assets/1.gif)
 ![Results](https://github.com/Ghbbbbb/Iphone-dobot/blob/main/assets/2.gif)
 ![Results](https://github.com/Ghbbbbb/Iphone-dobot/blob/main/assets/3.gif)
+![Results](https://github.com/Ghbbbbb/Iphone-dobot/blob/main/assets/4.gif)
+
 
 ## 📄 联系
 
-如果有任何问题，请[联系我们]("http://www.neurcl.cn")
+如果有任何问题，请[联系我们](http://www.neurcl.cn)
