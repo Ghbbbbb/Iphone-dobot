@@ -63,10 +63,12 @@ python client.py --prompt "dobot2" --voice #根据用户语音输入测试，将
 ## 📈 结果
 ![Results](https://github.com/Ghbbbbb/Iphone-dobot/blob/main/assets/1.gif)
 ![Results](https://github.com/Ghbbbbb/Iphone-dobot/blob/main/assets/2.gif)
-<p align="center">
 ![Results](https://github.com/Ghbbbbb/Iphone-dobot/blob/main/assets/4.gif)
-</p>
-
+<div class="item-div">
+     <div>
+        <img src="https://github.com/Ghbbbbb/Iphone-dobot/blob/main/assets/4.gif"/>
+     </div>
+</div>
 ## 📄 联系
 
 如果有任何问题，请[联系我们](http://www.neurcl.cn)
